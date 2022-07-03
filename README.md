@@ -1,2 +1,2 @@
-# CS-Learned
-CSL (CS Learned)
+# TIL
+today i learned
