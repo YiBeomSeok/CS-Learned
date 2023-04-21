@@ -7,6 +7,7 @@
 Paging3는 비동기 처리를 지원하며, 코루틴과 Flow를 사용하여 백그라운드에서 데이터를 로드할 수 있다.
 
 ![img.png](images/img.png)
+
 https://developer.android.com/topic/libraries/architecture/paging/v3-overview
 
 The Paging library integrates directly into the recommended Android app architecture. The library's components operate
