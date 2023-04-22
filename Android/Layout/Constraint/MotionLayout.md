@@ -84,5 +84,12 @@ XML 코드를 보면 scene_01이란 코드가 보이는데 이것을 추가해�
     </MotionScene>
 ```
 
+코드로 구현하면 복잡할 수 있는 것을 직관적으로 구현할 수 있다는 장점이 있다.
+
 - `Transition`에 대해 알아야 사용할 수 있다.
 - `OnSwipe`에 대해 알아야 사용할 수 있다.
+
+### 사용 예시를 보고 오면 좋다.
+
+https://developer.android.com/training/constraint-layout/motionlayout/examples?hl=ko
+
