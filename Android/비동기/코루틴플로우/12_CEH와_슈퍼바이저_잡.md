@@ -153,4 +153,44 @@ fun main() = runBlocking<Unit> {
 }
 ```
 
+### SupervisorScope
+
+- 일반적으로 코루틴 스코프 내에서 발생한 오류는 해당 스코프에 있는 모든 코루틴을 취소한다. 그러나 `SupervisorScope`를 사용하면 이러한 오류 전파를 제한할 수 있다.
+- `SupervisorScope` 내에서 하나의 자식 코루틴에서 오류가 발생하더라도, 다른 자식 코루틴들은 계속 실행된다. 즉 `SupervisorScope`는 자식 코루틴들이 독립적으로 실행되도록 보장한다. 이는
+  오류가 발생한 코루틴이 전체 작업의 진행을 방해하는 것을 방지하며, 각 코루틴이 개별적으로 오류를 처리할 수 있도록 한다.
+- 따라서, `SupervisorScope`는 병렬 작업이 필요하고, 각 작업이 독립적으로 실행되어야 하며, 하나의 작업에서 발생한 오류가 다른 작업에 영향을 미치지 않아야 하는 경우에 유용하다.
+
+```kotlin
+import kotlin.random.Random
+import kotlin.system.*
+import kotlinx.coroutines.*
+
+suspend fun printRandom1() {
+    delay(1000L)
+    println(Random.nextInt(0, 500))
+}
+
+suspend fun printRandom2() {
+    delay(500L)
+    throw ArithmeticException()
+}
+
+suspend fun supervisoredFunc() = supervisorScope {
+    launch { printRandom1() }
+    launch(ceh) { printRandom2() }
+}
+
+val ceh = CoroutineExceptionHandler { _, exception ->
+    println("Something happend: $exception")
+}
+
+fun main() = runBlocking<Unit> {
+    val scope = CoroutineScope(Dispatchers.IO)
+    val job = scope.launch {
+        supervisoredFunc()
+    }
+    job.join()
+}
+```
+
 > 슈퍼바이저 스코프를 사용할 때 주의점은 무조건 자식 수준에서 예외를 핸들링 해야한다는 것입니다. 자식의 실패가 부모에게 전달되지 않기 때문에 자식 수준에서 예외를 처리해야합니다.
