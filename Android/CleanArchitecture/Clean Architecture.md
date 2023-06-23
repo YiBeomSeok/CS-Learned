@@ -1,6 +1,6 @@
 # Clean Architecture
 
-![img.png](images/clean_architecture_1.png)
+![img.png](../images/clean_architecture_1.png)
 
 소프트웨어 개발에 있어 견고하고 유지보수가 쉬운 코드를 작성하기 위한 아키텍처 원칙.
 
@@ -12,7 +12,7 @@
 
 ## 안드로이드에서 클린 아키텍처를 구현하기 위한 주요 계층
 
-![img.png](images/clean_architecture_2.png)
+![img.png](../images/clean_architecture_2.png)
 
 ### 1. 도메인 계층(Domain Layer)
 
